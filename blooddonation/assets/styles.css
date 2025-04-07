@@ -1,41 +1,566 @@
-/* assets/styles.css */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 20px;
-}
-
-.tab-content {
-    padding: 20px;
-}
-
-h3 {
-    color: black;
-    font-weight: bold;
-    text-align: center;
-    border: 2px solid #c0392b;
-    background-color: #ffe6e6;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
-}
-
-.legend {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 5px;
-    margin-top: 20px;
-}
-
-.graph-container {
-    margin-top: 20px;
-}
-
-.card {
+/* ========================================== */
+/* Variables & Root Settings                  */
+/* ========================================== */
+:root {
+    --primary-color: #e63946;      /* Blood red */
+    --secondary-color: #f1faee;    /* Off-white */
+    --accent-color: #1d3557;       /* Dark blue */
+    --success-color: #2a9d8f;      /* Teal */
+    --warning-color: #e9c46a;      /* Yellow */
+    --danger-color: #e76f51;       /* Orange-red */
+    --text-color: #333333;
+    --light-text: #f1faee;
+    --border-radius: 8px;
+    --transition-speed: 0.3s;
+    --box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  }
+  
+  /* ========================================== */
+  /* Global Styles                              */
+  /* ========================================== */
+  body {
+    font-family: var(--font-main);
+    background-color: #f9fafb;
+    color: var(--text-color);
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed);
+  }
+  
+  .container-fluid {
+    padding: 1.5rem;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  /* ========================================== */
+  /* Navbar Styling & Branding                  */
+  /* ========================================== */
+  .navbar {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background-color: white !important;
+    border-bottom: 1px solid #e9ecef;
+    padding: 0.75rem 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+  }
+  
+  .navbar .navbar-brand {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--primary-color) !important;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar .navbar-brand img {
+    height: 32px;
+    margin-right: 10px;
+  }
+  
+  .navbar-toggler {
+    border: none;
+    padding: 0.5rem;
+  }
+  
+  .navbar-toggler:focus {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .navbar .nav-link {
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    color: var(--accent-color);
+    transition: color var(--transition-speed);
+  }
+  
+  .navbar .nav-link:hover {
+    color: var(--primary-color);
+  }
+  
+  .navbar .active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+  }
+  
+  /* ========================================== */
+  /* Card & Container Styling                   */
+  /* ========================================== */
+  .card {
+    border-radius: var(--border-radius);
+    border: none;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  }
+  
+  .card-header {
     background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 1rem 1.25rem;
+    font-weight: 600;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .graph-container {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    box-shadow: var(--card-shadow);
+    height: 400px;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* ========================================== */
+  /* Button & Form Styling                      */
+  /* ========================================== */
+  .btn {
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1.25rem;
+    font-weight: 500;
+    transition: all var(--transition-speed);
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-primary:hover {
+    background-color: #d12c39;
+    border-color: #d12c39;
+  }
+  
+  .btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .form-control, .form-select {
+    border-radius: var(--border-radius);
+    padding: 0.65rem 1rem;
+    border: 1px solid #dee2e6;
+    transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  }
+  
+  .form-control:focus, .form-select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.25);
+  }
+  
+  .input-group {
+    margin-bottom: 1rem;
+  }
+  
+  /* ========================================== */
+  /* Offcanvas Sidebar Styling                  */
+  /* ========================================== */
+  .offcanvas {
+    background-color: var(--secondary-color);
+    width: 280px;
+    transition: transform var(--transition-speed);
+  }
+  
+  .offcanvas .offcanvas-header {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 1rem 1.25rem;
+  }
+  
+  .offcanvas-title {
+    font-weight: 600;
+    color: var(--accent-color);
+  }
+  
+  .offcanvas .offcanvas-body {
+    padding: 1rem;
+  }
+  
+  .sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .sidebar-nav .nav-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--accent-color);
+    border-radius: var(--border-radius);
+    transition: all var(--transition-speed);
+  }
+  
+  .sidebar-nav .nav-link:hover {
+    background-color: rgba(29, 53, 87, 0.05);
+    color: var(--primary-color);
+  }
+  
+  .sidebar-nav .nav-link.active {
+    background-color: var(--primary-color);
+    color: white;
+  }
+  
+  .sidebar-nav .nav-link i {
+    margin-right: 10px;
+    width: 20px;
     text-align: center;
-    flex: 1;
-}
+  }
+  
+  /* ========================================== */
+  /* Toast Notifications                        */
+  /* ========================================== */
+  .toast-container {
+    z-index: 1055;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+  }
+  
+  .toast {
+    background-color: white;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary-color);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 0.75rem;
+    min-width: 300px;
+  }
+  
+  .toast-header {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    padding: 0.75rem 1rem;
+  }
+  
+  .toast-body {
+    padding: 1rem;
+  }
+  
+  /* Toast variants */
+  .toast-success {
+    border-left-color: var(--success-color);
+  }
+  
+  .toast-warning {
+    border-left-color: var(--warning-color);
+  }
+  
+  .toast-danger {
+    border-left-color: var(--danger-color);
+  }
+  
+  /* ========================================== */
+  /* Spinner (Loading)                          */
+  /* ========================================== */
+  .spinner-border,
+  .spinner-grow {
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--primary-color);
+  }
+  
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    border-radius: var(--border-radius);
+  }
+  
+  /* ========================================== */
+  /* Date Picker & Input Styling                */
+  /* ========================================== */
+  .DateInput_input {
+    border: 1px solid #dee2e6 !important;
+    border-radius: var(--border-radius) !important;
+    padding: 0.65rem 1rem !important;
+    font-family: var(--font-main) !important;
+    transition: border-color var(--transition-speed) !important;
+  }
+  
+  .DateInput_input:focus {
+    border-color: var(--primary-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(230, 57, 70, 0.25) !important;
+  }
+  
+  .DateRangePickerInput {
+    background: white;
+    border-radius: var(--border-radius);
+    border: 1px solid #dee2e6 !important;
+  }
+  
+  /* ========================================== */
+  /* Data Tables Styling                        */
+  /* ========================================== */
+  .table {
+    margin-bottom: 0;
+  }
+  
+  .table th {
+    font-weight: 600;
+    border-top: none;
+    background-color: rgba(0,0,0,0.02);
+  }
+  
+  .table td, .table th {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: rgba(230, 57, 70, 0.05);
+  }
+  
+  .table-responsive {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+  }
+  
+  /* ========================================== */
+  /* Custom Badge & Pill Styling               */
+  /* ========================================== */
+  .badge {
+    font-weight: 500;
+    padding: 0.35rem 0.75rem;
+    border-radius: 30px;
+  }
+  
+  .pill {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .pill-primary {
+    background-color: rgba(230, 57, 70, 0.1);
+    color: var(--primary-color);
+  }
+  
+  .pill-success {
+    background-color: rgba(42, 157, 143, 0.1);
+    color: var(--success-color);
+  }
+  
+  /* ========================================== */
+  /* Chart & Visualization Styling              */
+  /* ========================================== */
+  .chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 6px;
+  }
+  
+  /* ========================================== */
+  /* Animations & Transitions                   */
+  /* ========================================== */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  /* ========================================== */
+  /* Responsive Tweaks                          */
+  /* ========================================== */
+  @media (max-width: 1200px) {
+    .container-fluid {
+      padding: 1rem;
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .offcanvas {
+      width: 100% !important;
+    }
+    
+    #page-content {
+      margin-left: 0 !important;
+    }
+    
+    .chart-legend {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card-body {
+      padding: 1rem;
+    }
+    
+    .graph-container {
+      height: 300px;
+    }
+    
+    .toast {
+      min-width: auto;
+      width: 100%;
+    }
+    
+    .toast-container {
+      left: 0;
+      right: 0;
+      width: 100%;
+      padding: 0 1rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .navbar {
+      padding: 0.5rem 1rem;
+    }
+    
+    .card-header {
+      padding: 0.75rem 1rem;
+    }
+    
+    .graph-container {
+      height: 250px;
+    }
+  }
+  
+  /* ========================================== */
+  /* Dark Mode Styling                          */
+  /* ========================================== */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --text-color: #e4e6eb;
+      --background-color: #121212;
+      --secondary-color: #1e1e2e;
+      --card-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+    
+    body {
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+    
+    .card, 
+    .graph-container, 
+    .tab-content {
+      background-color: var(--secondary-color);
+      box-shadow: var(--card-shadow);
+    }
+    
+    .card-header {
+      background-color: rgba(0,0,0,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .navbar, 
+    .offcanvas {
+      background-color: var(--secondary-color) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .navbar .navbar-brand {
+      color: var(--primary-color) !important;
+    }
+    
+    .form-control,
+    .form-select {
+      background-color: var(--background-color);
+      border-color: rgba(255,255,255,0.1);
+      color: var(--text-color);
+    }
+    
+    .form-control:focus,
+    .form-select:focus {
+      background-color: var(--background-color);
+      color: var(--text-color);
+    }
+    
+    .table th {
+      background-color: rgba(255,255,255,0.05);
+    }
+    
+    .table td,
+    .table th {
+      border-color: rgba(255,255,255,0.05);
+      color: var(--text-color);
+    }
+    
+    .loading-overlay {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    .toast {
+      background-color: var(--secondary-color);
+      color: var(--text-color);
+    }
+    
+    .sidebar-nav .nav-link:hover {
+      background-color: rgba(255,255,255,0.05);
+    }
+    
+    .table-hover tbody tr:hover {
+      background-color: rgba(255,255,255,0.05);
+    }
+  }
