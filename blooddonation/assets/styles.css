@@ -1,0 +1,41 @@
+/* assets/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.tab-content {
+    padding: 20px;
+}
+
+h3 {
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    border: 2px solid #c0392b;
+    background-color: #ffe6e6;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.legend {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.graph-container {
+    margin-top: 20px;
+}
+
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 1;
+}
